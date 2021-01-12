@@ -1,4 +1,4 @@
-﻿using GlobalGames.Dados.Entidades;
+﻿using GlobalGamesCet49.Dados.Entidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace GlobalGamesCet49.Dados
@@ -8,6 +8,7 @@ namespace GlobalGamesCet49.Dados
 
         public DbSet<Contactos> Contactos { get; set; }
 
+        public DbSet<Inscricoes> Inscricoes { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

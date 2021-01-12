@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace GlobalGames.Dados.Entidades
+namespace GlobalGamesCet49.Dados.Entidades
 {
     public class Contactos
     {

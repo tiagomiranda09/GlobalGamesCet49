@@ -1,0 +1,93 @@
+﻿@model GlobalGamesCet49.Dados.Entidades.Inscricoes
+
+@{
+    ViewData["Title"] = "Inscrição";
+}
+
+<section id="main">
+    <div class="container">
+        <article id="main-col">
+            <h1 class="titulo">Inscrição</h1>
+
+            <ul id="servicos">
+                <li>
+                    <h3>Novo Jogo Realidade Virtual</h3>
+                    
+                    <p>Inscreve-te já!</p>
+                </li>
+
+            </ul>
+        </article>
+
+            <aside id="sidebar">
+                <div class="dark">
+                    <form id="formulario" class="orcamento" asp-action="Inscricoes">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="text-danger">
+                            <label asp-for="Nome">Nome:</label>
+                            <input asp-for="Nome" type="text" />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                        <div class="text-danger">
+                            <label asp-for="Apelido">Ultimo Nome:</label>
+                            <input asp-for="Apelido" type="text" />
+                            <span asp-validation-for="Apelido" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-danger">
+                            <label asp-for="DataNascimento">Data de Nascimento:</label>
+                            <input asp-for="DataNascimento" type="date" />
+                            <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-danger">
+                            <label asp-for="Morada">Morada:</label>
+                            <input asp-for="Morada" type="text" />
+                            <span asp-validation-for="Morada" class="text-danger"></span>
+                        </div>
+
+
+                        <input name="Submit" type="submit" id="Submit" value="Enviar" class="button_1" />
+                    </form>
+                </div>
+            </aside>
+
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        document.querySelector('#inscricoes').className = 'selecionado';
+    </script>
+
+    <script>
+        const formu = document.querySelector("#formulario");
+
+        Event();
+
+        function Event() {
+            formu.addEventListener("submit", submit);
+        }
+
+        function submit(e) {
+            alert('Inscrição efetuada com sucesso')
+        }
+
+    </script>
+}

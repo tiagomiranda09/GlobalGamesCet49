@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GlobalGames.Dados.Entidades;
 using GlobalGamesCet49.Dados;
+using GlobalGamesCet49.Dados.Entidades;
 
 namespace GlobalGamesCet49.Controllers
 {
