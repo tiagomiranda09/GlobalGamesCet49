@@ -22,6 +22,26 @@ namespace GlobalGamesCet49.Dados.Entidades
         public string Morada { get; set; }
 
 
+        [Display(Name = "Image")]
+        public string ImageFile { get; set; }
+
+
+        
+
+        public string Image
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.ImageFile))
+                {
+                    return null;
+                }
+
+                return $"https://localhost:44351{this.ImageFile.Substring(1)}";
+            }
+        }
+
+
 
     }
 }
