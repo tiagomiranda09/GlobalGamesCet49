@@ -7,15 +7,24 @@ using System.Threading.Tasks;
 
 namespace GlobalGamesCet49.Controllers
 {
-    public class ContactosController : Controller
+    public class UserLoginsController : Controller
     {
         private readonly DataContext _context;
 
-        public ContactosController(DataContext context)
+        public UserLoginsController(DataContext context)
         {
             _context = context;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.UserLogin.ToListAsync());
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -24,43 +33,31 @@ namespace GlobalGamesCet49.Controllers
                 return NotFound();
             }
 
-            var contactos = await _context.Contactos
-                .FirstOrDefaultAsync(i => i.Id == id);
-            if (contactos == null)
+            var userLogin = await _context.UserLogin
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (userLogin == null)
             {
                 return NotFound();
             }
 
-            return View(contactos);
+            return View(userLogin);
         }
 
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Contactos.ToListAsync());
-        }
-
+       
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Morada,Mensagem")] Contactos contactos)
+        public async Task<IActionResult> Create([Bind("Id,Nome,ImageFile")] UserLogin userLogin)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(contactos);
+                _context.Add(userLogin);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(contactos);
+            return View(userLogin);
         }
 
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-
-        // GET: Contactos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -68,54 +65,34 @@ namespace GlobalGamesCet49.Controllers
                 return NotFound();
             }
 
-            var contactos = await _context.Contactos.FindAsync(id);
-            if (contactos == null)
+            var userLogin = await _context.UserLogin.FindAsync(id);
+            if (userLogin == null)
             {
                 return NotFound();
             }
-            return View(contactos);
+            return View(userLogin);
         }
 
-
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contactos = await _context.Contactos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (contactos == null)
-            {
-                return NotFound();
-            }
-
-            return View(contactos);
-        }
-
-
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Morada,Mensagem")] Contactos contactos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,ImageFile")] UserLogin userLogin)
         {
-            if (id != contactos.Id)
+            if (id != userLogin.Id)
             {
-
                 return NotFound();
-
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(contactos);
+                    _context.Update(userLogin);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactosExists(contactos.Id))
+                    if (!UserLoginExists(userLogin.Id))
                     {
                         return NotFound();
                     }
@@ -126,23 +103,39 @@ namespace GlobalGamesCet49.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(contactos);
+            return View(userLogin);
         }
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var userLogin = await _context.UserLogin
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (userLogin == null)
+            {
+                return NotFound();
+            }
+
+            return View(userLogin);
+        }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var contactos = await _context.Contactos.FindAsync(id);
-            _context.Contactos.Remove(contactos);
+            var userLogin = await _context.UserLogin.FindAsync(id);
+            _context.UserLogin.Remove(userLogin);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ContactosExists(int id)
+        private bool UserLoginExists(int id)
         {
-            return _context.Contactos.Any(e => e.Id == id);
+            return _context.UserLogin.Any(e => e.Id == id);
         }
     }
 }
